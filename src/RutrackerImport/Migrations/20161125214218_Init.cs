@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NetCoreApp.Migrations
+namespace RutrackerImport.Migrations
 {
     public partial class Init : Migration
     {

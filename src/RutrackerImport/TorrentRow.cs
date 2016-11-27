@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NetCoreApp
+namespace RutrackerImport
 {
     public class TorrentRow
     {

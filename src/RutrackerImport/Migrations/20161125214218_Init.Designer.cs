@@ -3,9 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetCoreApp;
 
-namespace NetCoreApp.Migrations
+namespace RutrackerImport.Migrations
 {
     [DbContext(typeof(RutrackerContext))]
     [Migration("20161125214218_Init")]

@@ -5,7 +5,7 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace NetCoreApp
+namespace RutrackerImport
 {
     public class Program
     {

@@ -5,7 +5,7 @@ using System.Data.Common;
 using System.IO;
 using System.Xml;
 
-namespace NetCoreApp
+namespace RutrackerImport
 {
     public class XmlDataReader : DbDataReader
     {

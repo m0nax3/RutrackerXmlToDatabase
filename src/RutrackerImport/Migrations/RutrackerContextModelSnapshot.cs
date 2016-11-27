@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace NetCoreApp.Migrations
+namespace RutrackerImport.Migrations
 {
     [DbContext(typeof(RutrackerContext))]
     internal class RutrackerContextModelSnapshot : ModelSnapshot
