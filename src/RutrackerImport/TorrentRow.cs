@@ -18,7 +18,7 @@ namespace RutrackerImport
         public long Size { get; set; }
 
         [Column(Order = 3)]
-        [StringLength(255)]
+        [StringLength(512)]
         public string Title { get; set; }
 
         [Column(Order = 4)]
@@ -33,10 +33,6 @@ namespace RutrackerImport
         public string Magnet { get; set; }
 
         [Column(Order = 7)]
-        [StringLength(255)]
-        public string Url { get; set; }
-
-        [Column(Order = 8)]
         public string Content { get; set; }
     }
 }

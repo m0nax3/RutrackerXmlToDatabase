@@ -8,9 +8,10 @@ using RutrackerImport;
 namespace RutrackerImport.Migrations
 {
     [DbContext(typeof(RutrackerContext))]
-    partial class RutrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20170506100408_UrlColumnRemoved")]
+    partial class UrlColumnRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

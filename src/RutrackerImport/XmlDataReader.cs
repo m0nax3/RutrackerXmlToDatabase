@@ -18,7 +18,7 @@ namespace RutrackerImport
             _raptor = EnumerateTorrents().GetEnumerator();
         }
 
-        public override int FieldCount => 9;
+        public override int FieldCount => 8;
 
         public IEnumerable<TorrentRow> EnumerateTorrents()
         {
@@ -53,11 +53,6 @@ namespace RutrackerImport
                                     case "title":
                                         reader.ReadStartElement();
                                         row.Title = reader.Value;
-                                        reader.Read();
-                                        break;
-                                    case "url":
-                                        reader.ReadStartElement();
-                                        row.Url = reader.Value;
                                         reader.Read();
                                         break;
                                     case "magnet":
@@ -120,8 +115,6 @@ namespace RutrackerImport
                 case 6:
                     return _raptor.Current.Magnet;
                 case 7:
-                    return _raptor.Current.Url;
-                case 8:
                     return _raptor.Current.Content;
             }
             throw new InvalidOperationException("Unexpected column ordinal index");
