@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Update="ConnectionStrings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
