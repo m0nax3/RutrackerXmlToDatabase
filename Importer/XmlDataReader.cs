@@ -18,7 +18,7 @@ namespace RutrackerImport
             _raptor = EnumerateTorrents().GetEnumerator();
         }
 
-        public override int FieldCount => 8;
+        public override int FieldCount => 9;
 
         public IEnumerable<TorrentRow> EnumerateTorrents()
         {
@@ -36,30 +36,42 @@ namespace RutrackerImport
                 {
                     reader.MoveToContent();
 
-                    var row = new TorrentRow();
+                    TorrentRow row = null;
 
+                    bool inTorrent = false;
                     while (reader.Read())
+                    {
                         switch (reader.NodeType)
                         {
                             case XmlNodeType.Element:
                                 switch (reader.Name)
-                                {
+                                {   
                                     case "torrent":
-                                        row = new TorrentRow();
-                                        row.Id = int.Parse(reader.GetAttribute(0));
-                                        row.Date = DateTime.Parse(reader.GetAttribute(1));
-                                        row.Size = long.Parse(reader.GetAttribute(2));
+                                        if (inTorrent)
+                                        {
+                                            row.Hash = reader.GetAttribute(0);
+                                            row.TrackerId = reader.GetAttribute(1);
+                                            inTorrent = false;
+                                        }
+                                        else
+                                        {
+                                            row = new TorrentRow();
+                                            row.Id = int.Parse(reader.GetAttribute(0));
+                                            row.Date = DateTime.Parse(reader.GetAttribute(1));
+                                            row.Size = long.Parse(reader.GetAttribute(2));
+                                            inTorrent = true;
+                                        }
                                         break;
                                     case "title":
                                         reader.ReadStartElement();
                                         row.Title = reader.Value;
                                         reader.Read();
                                         break;
-                                    case "magnet":
-                                        reader.ReadStartElement();
-                                        row.Magnet = reader.Value;
-                                        reader.Read();
-                                        break;
+                                    //case "magnet":
+                                    //    reader.ReadStartElement();
+                                    //    row.Magnet = reader.Value;
+                                    //    reader.Read();
+                                    //    break;
                                     case "forum":
                                         row.ForumId = int.Parse(reader.GetAttribute(0));
                                         reader.ReadStartElement();
@@ -84,9 +96,12 @@ namespace RutrackerImport
 
                                 break;
                             case XmlNodeType.EndElement:
+                                if(row == null)
+                                    yield break;
                                 yield return row;
+                                row = null;
                                 break;
-                        }
+                        }}
                 }
             }
         }
@@ -113,8 +128,10 @@ namespace RutrackerImport
                 case 5:
                     return _raptor.Current.ForumTitle;
                 case 6:
-                    return _raptor.Current.Magnet;
+                    return _raptor.Current.Hash;
                 case 7:
+                    return _raptor.Current.TrackerId;
+                case 8:
                     return _raptor.Current.Content;
             }
             throw new InvalidOperationException("Unexpected column ordinal index");
@@ -133,6 +150,31 @@ namespace RutrackerImport
         }
 
         #region NotSupportedException
+        public override int GetOrdinal(string name)
+        {
+            switch (name)
+            {
+                case nameof(_raptor.Current.Id):
+                    return 0;
+                case nameof(_raptor.Current.Date):
+                    return 1;
+                case nameof(_raptor.Current.Size):
+                    return 2;
+                case nameof(_raptor.Current.Title):
+                    return 3;
+                case nameof(_raptor.Current.ForumId):
+                    return 4;
+                case nameof(_raptor.Current.ForumTitle):
+                    return 5;
+                case nameof(_raptor.Current.Hash):
+                    return 6;
+                case nameof(_raptor.Current.TrackerId):
+                    return 7;
+                case nameof(_raptor.Current.Content):
+                    return 8;
+            }
+            throw new InvalidOperationException("Unexpected column ordinal index");
+        }
 
         public override int GetValues(object[] values)
         {
@@ -207,10 +249,6 @@ namespace RutrackerImport
             throw new NotSupportedException();
         }
 
-        public override int GetOrdinal(string name)
-        {
-            throw new NotSupportedException();
-        }
 
         public override string GetString(int ordinal)
         {

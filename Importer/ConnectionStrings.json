@@ -1,0 +1,6 @@
+﻿{
+  "ConnectionStrings": {
+    "Provider": "SqlServer",
+    "Connection":"data source=localhost;initial catalog=Rutracker;integrated security=true;multipleactiveresultsets=True;App=Importer"
+  }
+}

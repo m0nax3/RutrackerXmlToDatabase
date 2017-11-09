@@ -38,9 +38,9 @@ namespace RutrackerImport
 
             Console.WriteLine("input full path to rutracker xml and press enter:");
 
-            string sourcePath = Console.ReadLine();
-              //@"G:\TorrentDownload\backup.20161015122203\backup.20161015122203.xml"
-
+            string sourcePath =
+                Console.ReadLine();
+                //@"D:\PtpDownload\backup.20170916154625.xml";
             if (!File.Exists(sourcePath))
             {
                 Console.WriteLine("File not found");
@@ -54,13 +54,16 @@ namespace RutrackerImport
 
                 Console.WriteLine("TRUNCATE table");
 
-                context.Database.ExecuteSqlCommand($"TRUNCATE TABLE {nameof(context.Torrents)}");
+                var rawSqlString = new RawSqlString($"TRUNCATE TABLE {nameof(context.Torrents)}");
+                context.Database.ExecuteSqlCommand(rawSqlString);
 
                 Console.WriteLine("work");
 
                 using (var loader = new SqlBulkCopy(connection))
                 {
                     loader.DestinationTableName = nameof(context.Torrents);
+
+                    FillMapping(loader);
 
                     using (
                         var reader =
@@ -73,13 +76,28 @@ namespace RutrackerImport
                         loader.EnableStreaming = true;
                         loader.NotifyAfter = size / 2;
                         loader.SqlRowsCopied += Loader_SqlRowsCopied;
-
+                        
                         timer = Stopwatch.StartNew();
                         Console.Clear();
                         loader.WriteToServer(reader);
                     }
                 }
             }
+        }
+
+        private static void FillMapping(SqlBulkCopy loader)
+        {
+            var sample = new TorrentRow();
+
+            loader.ColumnMappings.Add(nameof(sample.Id), 0);
+            loader.ColumnMappings.Add(nameof(sample.Date), 1);
+            loader.ColumnMappings.Add(nameof(sample.Size), 2);
+            loader.ColumnMappings.Add(nameof(sample.Title), 3);
+            loader.ColumnMappings.Add(nameof(sample.ForumId), 4);
+            loader.ColumnMappings.Add(nameof(sample.ForumTitle),5);
+            loader.ColumnMappings.Add(nameof(sample.Hash), 7);
+            loader.ColumnMappings.Add(nameof(sample.TrackerId), 8);
+            loader.ColumnMappings.Add(nameof(sample.Content), 6);
         }
 
         private static void Loader_SqlRowsCopied(object sender, SqlRowsCopiedEventArgs e)

@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8375567B-6520-4CA7-8D31-9D2BD765288B}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8D7F0A0A-B66B-4168-AE33-C4D5C6E8D443}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RutrackerImport", "src\RutrackerImport\RutrackerImport.csproj", "{85258C24-6B68-466B-B937-03702276B01F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Importer", "Importer\Importer.csproj", "{A2DF9F87-9F02-4FB7-B138-E8CA85FCFB3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{85258C24-6B68-466B-B937-03702276B01F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85258C24-6B68-466B-B937-03702276B01F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85258C24-6B68-466B-B937-03702276B01F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85258C24-6B68-466B-B937-03702276B01F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DF9F87-9F02-4FB7-B138-E8CA85FCFB3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DF9F87-9F02-4FB7-B138-E8CA85FCFB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DF9F87-9F02-4FB7-B138-E8CA85FCFB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DF9F87-9F02-4FB7-B138-E8CA85FCFB3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{85258C24-6B68-466B-B937-03702276B01F} = {8375567B-6520-4CA7-8D31-9D2BD765288B}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7D3CE5B3-E02B-416C-825C-748E55A6ABF1}
 	EndGlobalSection
 EndGlobal

@@ -8,31 +8,25 @@ namespace RutrackerImport
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Column(Order = 0)]
         public int Id { get; set; }
 
-        [Column(Order = 1)]
         public DateTime Date { get; set; }
 
-        [Column(Order = 2)]
         public long Size { get; set; }
 
-        [Column(Order = 3)]
         [StringLength(512)]
         public string Title { get; set; }
 
-        [Column(Order = 4)]
         public int ForumId { get; set; }
 
-        [Column(Order = 5)]
         [StringLength(512)]
         public string ForumTitle { get; set; }
 
-        [Column(Order = 6)]
-        [StringLength(512)]
-        public string Magnet { get; set; }
+        [StringLength(80)]
+        public string Hash { get; set; }
 
-        [Column(Order = 7)]
+        public string TrackerId { get; set; }
+
         public string Content { get; set; }
     }
 }
